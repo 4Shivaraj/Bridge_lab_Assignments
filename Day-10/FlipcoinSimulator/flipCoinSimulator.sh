@@ -1,20 +1,34 @@
 #!/bin/bash -x
 echo "welcome to flip coin problem"
 
-read -p "Enter the range to flip: " num
-val=1;
-count_head=0;
-count_tail=0;
-while [ $val -le $num ]
+Hcount=21;
+Lcount=21;
+H_count=0;
+L_count=0;
+flag=1;
+if [ $Hcount -eq $Lcount ]
+then
+while [ $flag -eq 1 ]
 do
-guess=$(( RANDOM% 2))
+guess=$(( RANDOM%2 ))
 if [ $guess -eq 1 ]
 then
-        ((count_head++))
+        ((H_count++))
 else
-        ((count_tail++))
+        ((L_count++))
 fi
-((val++))
+if [ $H_count -eq 2 ] || [ $L_count -eq 2 ]
+then
+        break;
+else
+        continue;
+fi
 done
-echo "Number of times Heads won: "$count_head
-echo "Number of times Tails won: "$count_tail
+fi
+if [ $H_count -gt $L_count ]
+        then
+                echo  "Heads won"
+        else
+                echo "Tails Won"
+        fi
+
