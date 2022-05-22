@@ -1,34 +1,32 @@
 #!/bin/bash -x
 echo "welcome to flip coin problem"
-
-Hcount=21;
-Lcount=21;
-H_count=0;
-L_count=0;
 flag=1;
-if [ $Hcount -eq $Lcount ]
-then
+Hcount=0;
+Lcount=0;
 while [ $flag -eq 1 ]
 do
-guess=$(( RANDOM%2 ))
+guess=$(( RANDOM% 2))
 if [ $guess -eq 1 ]
 then
-        ((H_count++))
+        Hcount=`expr $Lcount + 1`
 else
-        ((L_count++))
+        Lcount=`expr $Lcount + 1`
 fi
-if [ $H_count -eq 2 ] || [ $L_count -eq 2 ]
-then
-        break;
-else
-        continue;
-fi
-done
-fi
-if [ $H_count -gt $L_count ]
+        if [[ $Hcount -eq 21 ]] || [[ $Lcount -eq 21 ]]
         then
-                echo  "Heads won"
+        break;
         else
-                echo "Tails Won"
+        continue;
         fi
+done
+if [[ $Hcount -gt $Lcount ]]
+then
+        echo "Heads won this many times: "$Hcount
+elif [[ $Lcount -gt $Hcount ]]
+then
+        echo "Tails won this many times: "$Lcount
+else
+        echo "It's a tie between them "
+fi
+
 
